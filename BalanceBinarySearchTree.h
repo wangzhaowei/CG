@@ -46,7 +46,7 @@ namespace MeowComputationalGeometry{
 
         BalanceBinarySearchTreeNode<ElementType>* insertNode(BalanceBinarySearchTreeNode<ElementType>* root, ElementType elem);
 
-        void inorderTraversal(NodeType* root, std::function<void(ElementType& node)> visit);
+        void inorder(NodeType* root, std::function<void(ElementType& node)> visit);
 
         NodeType* leftRotate(NodeType* root);
         NodeType* rightRotate(NodeType* root);

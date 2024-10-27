@@ -162,15 +162,15 @@ BalanceBinarySearchTree<ElementType, Compare, Equal>::remove(NodeType* root, Ele
 }
 
 template<typename ElementType, typename Compare, typename Equal>
-void BalanceBinarySearchTree<ElementType, Compare, Equal>::inorderTraversal(NodeType * root, std::function<void(ElementType&)> visit)
+void BalanceBinarySearchTree<ElementType, Compare, Equal>::inorder(NodeType * root, std::function<void(ElementType&)> visit)
 {
     if(root == nullptr){
         return;
     }
 
-    inorderTraversal(root->_left, visit);
+    inorder(root->_left, visit);
     visit(root->_value);
-    inorderTraversal(root->_right, visit);
+    inorder(root->_right, visit);
 }
 
 template <typename ElementType, typename Compare, typename Equal>
@@ -240,7 +240,7 @@ BalanceBinarySearchTreeNode<ElementType>* BalanceBinarySearchTree<ElementType, C
 template<typename ElementType, typename Compare, typename Equal>
 void BalanceBinarySearchTree<ElementType, Compare, Equal>::print()
 {
-    inorderTraversal(root, [](ElementType key){
+    inorder(root, [](ElementType key){
         std::cout << key << ' ';
     });
     std::cout << std::endl;
