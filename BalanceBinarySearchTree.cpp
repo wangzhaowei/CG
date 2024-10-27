@@ -141,7 +141,6 @@ BalanceBinarySearchTree<ElementType, Compare, Equal>::remove(NodeType* root, Ele
     }
 
     root->height = 1 + std::max(height(root->_left), height(root->_right));
-    const balance = getBalance(root);
 
     const int balance = getBalance(root);
     if(balance > 1 && _compare(root->_right->_value, elem)){
@@ -179,11 +178,11 @@ BalanceBinarySearchTreeNode<ElementType>*
 BalanceBinarySearchTree<ElementType, Compare, Equal>::leftRotate(NodeType* root)
 {
     if(root == nullptr){
-        return;
+        return root;
     }
 
     auto right = root->_right;
-    auto rl = right->left;
+    auto rl = right->_left;
     auto parent = root->_parent;
     root->_right = rl;
     right->_left = root;
@@ -193,7 +192,7 @@ BalanceBinarySearchTree<ElementType, Compare, Equal>::leftRotate(NodeType* root)
         rl->_parent = root;
     }
     if(parent == nullptr){
-        root = right;
+        this->root = right;
     }
     root->height = 1 + std::max(getHeight(root->_left), getHeight(root->_right));
     right->height = 1 + std::max(getHeight(right->_left), getHeight(right->_right));
@@ -219,7 +218,7 @@ BalanceBinarySearchTree<ElementType, Compare, Equal>::rightRotate(NodeType* root
         lr->_parent = root;
     }
     if(parent == nullptr){
-        root = left;
+        this->root = left;
     }
     root->height = 1 + std::max(getHeight(root->_left), getHeight(root->_right));
     left->height = 1 + std::max(getHeight(left->_left), getHeight(left->_right));

@@ -13,9 +13,9 @@ class Sample{
 int main(int argc, char const *argv[])
 {
     MeowComputationalGeometry::BalanceBinarySearchTree<int> tree;
+    tree.insert(3);
     tree.insert(2);
     tree.insert(1);
-    tree.insert(3);
     tree.insert(-30);
     tree.insert(10);
 
