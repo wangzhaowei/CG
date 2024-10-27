@@ -44,14 +44,14 @@ namespace MeowComputationalGeometry{
         int getHeight(BalanceBinarySearchTreeNode<ElementType>* root) const;
         int getBalance(BalanceBinarySearchTreeNode<ElementType>* root) const;
 
-        NodeType* minNode(NodeType* root) const;
-
         BalanceBinarySearchTreeNode<ElementType>* insertNode(BalanceBinarySearchTreeNode<ElementType>* root, ElementType elem);
 
         void inorderTraversal(NodeType* root, std::function<void(ElementType& node)> visit);
 
         NodeType* leftRotate(NodeType* root);
         NodeType* rightRotate(NodeType* root);
+
+        NodeType* findMinNode(NodeType* root) const;
 
         public:
         BalanceBinarySearchTree(Compare compare = defaultCompare);
