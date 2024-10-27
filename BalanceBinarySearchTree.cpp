@@ -113,23 +113,50 @@ BalanceBinarySearchTree<ElementType, Compare, Equal>::remove(NodeType* root, Ele
 
     if(_equal(root->_value, elem)){
         NodeType* ret = nullptr;
-        if(root->_left != nullptr){
-            ret = root->_left;
-            auto lr = ret->_left;
-            ret->_right = root->_right;
-            ret->height = 1 + std::max(getHeight(ret->_left), getHeight(ret->_right));
+        if(root->_left == nullptr || root->_right == nullptr){
+            auto tmp = root->_left ? root->_left : root->_right;
+            if(!tmp){
+                tmp = root;
+                root = nullptr;
+            }
+            else{
+                *root = *tmp;
+            }
+            delete tmp;
         }
-        else if(root->_right != nullptr){
-
+        else{
+            NodeType* minNode = findMinNode(root->_right);
+            root->_value = minNode->_value;
+            root->_right = remove(root->_right, minNode->_value);
         }
-        delete root;
-        return ret;
     }
     else if(_compare(root->_value, elem)){
         root->_right = remove(root->_right, elem);
     }
     else{
         root->_left = remove(root->_left, elem);
+    }
+    if(!root){
+        return root;
+    }
+
+    root->height = 1 + std::max(height(root->_left), height(root->_right));
+    const balance = getBalance(root);
+
+    const int balance = getBalance(root);
+    if(balance > 1 && _compare(root->_right->_value, elem)){
+        return leftRotate(root);
+    }
+    else if(balance < -1 && _compare(elem, root->_left->_value)){
+        return rightRotate(root);
+    }
+    else if(balance > 1 && _compare(elem, root->_right->_value)){
+        auto node = rightRotate(root->_right);
+        return leftRotate(root);
+    }
+    else if(balance < -1 && _compare(root->_left->_value, elem)){
+        auto node = leftRotate(root->_left);
+        return rightRotate(root);
     }
 
     return root;
@@ -197,6 +224,18 @@ BalanceBinarySearchTree<ElementType, Compare, Equal>::rightRotate(NodeType* root
     root->height = 1 + std::max(getHeight(root->_left), getHeight(root->_right));
     left->height = 1 + std::max(getHeight(left->_left), getHeight(left->_right));
     return left;
+}
+
+template <typename ElementType, typename Compare, typename Equal>
+BalanceBinarySearchTreeNode<ElementType>* BalanceBinarySearchTree<ElementType, Compare, Equal>::findMinNode(NodeType *root) const
+{
+    while(root){
+        if(!root->_left){
+            return root;
+        }
+        root = root->_left;
+    }
+    return nullptr;
 }
 
 template<typename ElementType, typename Compare, typename Equal>

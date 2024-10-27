@@ -44,6 +44,8 @@ namespace MeowComputationalGeometry{
         int getHeight(BalanceBinarySearchTreeNode<ElementType>* root) const;
         int getBalance(BalanceBinarySearchTreeNode<ElementType>* root) const;
 
+        NodeType* minNode(NodeType* root) const;
+
         BalanceBinarySearchTreeNode<ElementType>* insertNode(BalanceBinarySearchTreeNode<ElementType>* root, ElementType elem);
 
         void inorderTraversal(NodeType* root, std::function<void(ElementType& node)> visit);
