@@ -1,5 +1,6 @@
 #include <vector>
 
+class Segment;
 struct EventPoint
 {
     /* data */

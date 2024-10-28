@@ -1,3 +1,6 @@
+#ifndef MEOW_COMPUTATIONAL_GEOMETRY_PLACE_SWEEP_LINE_H
+#define MEOW_COMPUTATIONAL_GEOMETRY_PLACE_SWEEP_LINE_H
+
 #include "BalanceBinarySearchTree.h"
 #include <iostream>
 #include <vector>
@@ -5,6 +8,7 @@
 #include <algorithm>
 #include <queue>
 #include "EventPoint.h"
+#include "Segment.h"
 
 namespace MeowComputationalGeometry
 {
@@ -16,12 +20,6 @@ namespace MeowComputationalGeometry
             return a.position[0] <= b.position[0];
         }
         return a.position[1] > b.position[1];
-    };
-
-    struct Segment
-    {
-        std::vector<std::vector<int>> _endpoints;
-        Segment(std::vector<int> &upperPt, std::vector<int> &lowerPt);
     };
 
     class PlaneSweepLine
@@ -40,3 +38,5 @@ namespace MeowComputationalGeometry
         void initializeEventsQueue();
     };
 }
+
+#endif
