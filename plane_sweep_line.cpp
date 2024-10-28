@@ -19,7 +19,7 @@ namespace MeowComputationalGeometry
 
     void PlaneSweepLine::initializeEventsQueue()
     {
-        std::unordered_set<EventPoint> ptHash;
+        std::unordered_set<EventPoint, EventPointHash> ptHash;
     }
 
 }

@@ -15,11 +15,11 @@ namespace MeowComputationalGeometry
 
     auto comp = [](EventPoint &a, EventPoint &b)
     {
-        if (a.position[1] == b.position[1])
+        if (a._endpoint[1] == b._endpoint[1])
         {
-            return a.position[0] <= b.position[0];
+            return a._endpoint[0] <= b._endpoint[0];
         }
-        return a.position[1] > b.position[1];
+        return a._endpoint[1] > b._endpoint[1];
     };
 
     class PlaneSweepLine
