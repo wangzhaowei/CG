@@ -26,7 +26,7 @@ namespace MeowComputationalGeometry
         //  store the segments that upper endpoint on this pos
         std::vector<Segment> _segments;
 
-        EventPoint(std::vector<int> &endpoint);
+        EventPoint(const std::vector<int> &endpoint);
 
         bool operator==(const EventPoint &other) const
         {

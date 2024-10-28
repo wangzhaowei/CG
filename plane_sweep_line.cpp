@@ -4,7 +4,8 @@
 #include <vector>
 #include <algorithm>
 #include <queue>
-#include <unordered_set>
+#include <unordered_map>
+#include <queue>
 
 namespace MeowComputationalGeometry
 {
@@ -19,7 +20,29 @@ namespace MeowComputationalGeometry
 
     void PlaneSweepLine::initializeEventsQueue()
     {
-        std::unordered_set<EventPoint, EventPointHash> ptHash;
-    }
+        std::unordered_map<std::vector<int>, EventPoint> eventsHash;
+        auto handleEp = [&](std::vector<int> &endpoint, Segment &seg)
+        {
+            if (eventsHash.find(endpoint) == eventsHash.end())
+            {
+                eventsHash.insert({endpoint, EventPoint(endpoint)});
+            }
+            if (seg._endpoints[0] == endpoint)
+            {
+                auto &ep = eventsHash[endpoint];
+                ep._segments.emplace_back(seg);
+            }
+        };
 
+        for (auto &seg : _segments)
+        {
+            handleEp(seg._endpoints[0], seg);
+            handleEp(seg._endpoints[1], seg);
+        }
+
+        for (const auto &[endpoint, event] : eventsHash)
+        {
+            events.push(event);
+        }
+    }
 }
