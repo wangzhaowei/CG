@@ -1,6 +1,8 @@
-.vscode/c_cpp_properties.json
-.vscode/launch.json
-.vscode/settings.json
-.vscode/tasks.json
-main
-main.o
+
+build/*
+# 忽略 .vscode 文件夹中的所有文件
+.vscode/*
+
+# 但不忽略 launch.json 和 tasks.json
+!.vscode/launch.json
+!.vscode/tasks.json
